@@ -1,0 +1,129 @@
+set nocompatible              " be iMproved, required
+filetype off                  " required
+
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+" alternatively, pass a path where Vundle should install plugins
+"call vundle#begin('~/some/path/here')
+
+" let Vundle manage Vundle, required
+Plugin 'VundleVim/Vundle.vim'
+Plugin 'preservim/nerdtree'
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
+Plugin 'ryanoasis/vim-devicons'
+Plugin 'tiagofumo/vim-nerdtree-syntax-highlight'
+Plugin 'Xuyuanp/nerdtree-git-plugin'
+Plugin 'tell-k/vim-autopep8'
+Plugin 'Yggdroot/indentLine'
+Plugin 'frazrepo/vim-rainbow'
+" All of your Plugins must be added before the following line
+call vundle#end()            " required
+filetype plugin indent on    " required
+" To ignore plugin indent changes, instead use:
+"filetype plugin on
+"
+" Brief help
+" :PluginList       - lists configured plugins
+" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
+" :PluginSearch foo - searches for foo; append `!` to refresh local cache
+" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
+"
+" see :h vundle for more details or wiki for FAQ
+" Put your non-Plugin stuff after this line
+
+""-------------------------------------------------------------
+" AIRLINE
+" ------------------------------------------------------------
+"set aitline theme"
+let g:airline_theme='deus'
+" enable powerline fonts
+let g:airline_powerline_fonts = 1
+" enable tabline
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#left_sep = ' '
+let g:airline#extensions#tabline#left_alt_sep = '|'
+" show tab number in tab line
+let g:airline#extensions#tabline#tab_nr_type = 1
+let g:airline#extensions#tabline#formatter = 'default'
+let g:airline#extensions#vimtex#left = ""
+let g:airline#extensions#vimtex#right = ""
+"
+set laststatus=2 " Show the statusline
+set noshowmode " Hide the default mode text
+"  airline symbols dictionary
+if !exists('g:airline_symbols')
+    let g:airline_symbols = {}
+endif
+if has("gui_running")
+  set guifont=MesloLGSDZForPowerline-Regular:h16
+endif
+let g:airline_left_sep = ''
+let g:airline_left_alt_sep = ''
+let g:airline_right_sep = ''
+let g:airline_right_alt_sep = ''
+let g:airline_symbols.branch = ''
+let g:airline_symbols.readonly = ''
+let g:airline_symbols.linenr = ''
+
+let g:rainbow_conf = {
+	\	'separately': {
+	\		'nerdtree': 0,
+	\	}
+	\}
+
+"NERDTree Setting"
+autocmd vimenter * NERDTree  "自动开启Nerdtree
+"let g:NERDTreeWinSize = 25 "设定 NERDTree 视窗大小
+"开启/关闭nerdtree快捷键
+map <C-f> :NERDTreeToggle<CR>
+
+
+
+set encoding=utf-8
+set laststatus=2
+set t_Co=256
+
+
+set fileencodings=utf8
+set history=150
+""set nu
+set ai
+set cursorline
+set tabstop=4
+set shiftwidth=4
+set mouse=a
+set hlsearch
+set cindent
+set backspace=indent,eol,start
+set laststatus=2
+set wrap
+set mouse=a   " 開啟 mouse-reporting 功能
+au FileType c,cpp,py,js,json,objc,objcpp call rainbowToggle()
+"let g:rainbow_active = 1
+let g:NERDTreeMouseMode=3  " optional: 單鍵點擊就可以打開資料夾/檔案
+let g:Powerline_symbols = 'fancy'
+let g:indentLine_SetColors=0
+let g:indentLine_color_term=239
+let g:indentLine_char_list = ['|', '¦', '┆', '┊']
+let g:autopep8_disable_show_diff=1
+autocmd FileType python noremap <buffer> <F8> :call Autopep8()<CR> 
+colorscheme onedark
+syntax enable
+
+inoremap ( ()<Esc>i
+inoremap {<CR> {<CR>}<Esc>ko
+inoremap {{ {}<ESC>i
+inoremap [ []<Esc>i
+inoremap < <><Esc>i
+inoremap " ""<Esc>I
+inoremap ' ''<Esc>I
+nnoremap <silent> <C-a> :NERDTreeToggle <CR>
+nmap <Leader>r :NERDTreeRefreshRoot <CR> "nerd 更新資料夾結構"
+map <silent> <C-i> :IndentLinesToggle<CR>"IndentLinesToggle快捷鍵"
+map <silent> <s-r> :RainbowToggle <CR>
+filetype indent on
+
+syntax enable
+hi LineNr cterm=bold ctermfg=DarkGrey ctermbg=NONE
